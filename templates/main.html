@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            width: 100%;
+            height: fit-content;
+        }
+        table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #666565;
+  text-align: left;
+  padding: 8px;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+.green{
+    background-color: rgb(128, 226, 128);
+    width: fit-content;
+}
+.red{
+    background-color: rgb(187, 32, 32);
+    width: 250px;
+}
+
+
+input:hover{
+    background-color: rgb(179, 170, 170);
+    color: rgb(51, 32, 32);
+   
+    
+}
+input{
+    font-size: 14px;
+    border-radius: 5px;
+}
+    </style>
+</head>
+<body>
+    <center>
+        <form action="/result" method="post">
+            <label>search by name or lastname:</label>
+            <input name="info" type="text" >
+            <input type="submit" >
+    
+        </form>
+        </center>
+        <br>
+        <br>
+
+    <center>
+
+        
+      <div style="width: 500px;height: fit-content; position: relative; border: 1px solid black; border-radius: 4px; padding: 10px; " >  
+        <form action="/" method="post" >
+            
+            <label><u>add student</u></label>
+            <br>
+            <br>
+            <input required type="text" name="name" placeholder="name">
+            <input required type="text" name="lastname" placeholder="lastname">
+            <br>
+            <br>
+            <input required type="number" name="math" placeholder="math point">
+            <input required type="number" name="history" placeholder="history point">
+            <br>
+            <br>
+            <input required type="number" name="python" placeholder="python point">
+            <input type="submit" value="add student">
+        </form>
+        </div>
+    </center>
+    <br>
+    <center>
+        {%if sms!=''%}
+        <p style="font-size: 18px; font-weight: 800; " >{{sms}}</p>
+        {%endif%}
+    </center>
+   
+    
+    <table id="table">
+        <tr>
+            <th>Name</th>
+            <th>Lastname</th>
+            <th>Math</th>
+            <th>History</th>
+            <th>Python</th>
+            <th  >Average</th>
+            <th  >Delete</th>
+          </tr>
+          {% for i in students %}
+          <tr>
+            <td>{{i[0]}}</td>
+            <td>{{i[1]}}</td>
+            <td>{{i[2]}}</td>
+            <td>{{i[3]}}</td>
+            <td>{{i[4]}}</td>
+            {% if i[6] == 'red' %}
+            <td class= "{{i[6]}}" >{{i[5]}} failed</td>
+            {% else %}
+            <td class= "{{i[6]}}" >{{i[5]}} passed</td>
+            {% endif %}
+
+            <td style="width: 120px;" >
+                <center>
+                <form action="/deleted" method="post" >
+                    <input style="background-color: rgb(192, 191, 191); font-size: 15px; width: 80px; color: rgb(202, 8, 8); font-weight: 500; border-radius: 5px;" type="submit" value="delete" name="{{i[0]}} {{i[1]}}" >
+                </form>
+                </center>
+                
+            
+            </td>
+          
+          </tr>
+          {% endfor %}
+
+      
+          
+     
+    </table>
+</body>
+<script>
+</script>
+</html>
